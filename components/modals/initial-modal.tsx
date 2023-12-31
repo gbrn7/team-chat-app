@@ -1,4 +1,9 @@
 'use client'
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form"
+import { useEffect, useState } from "react";
+
 import {
   Dialog,
   DialogContent,
@@ -7,9 +12,7 @@ import {
   DialogTitle,
   DialogDescription
 } from "../ui/dialog"
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form"
+
 import {
   Form,
   FormControl,
@@ -20,7 +23,7 @@ import {
 } from "../ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { FileUpload } from "@/components/ui/file-upload";
 
 const formShcema = z.object({
   name: z.string().min(1, {
@@ -71,7 +74,20 @@ export const InitialModal = () => {
           <form className="space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="space-y-8 px-6">
               <div className="flex items-center text-center justify-center ">
-                TODO: Image upload
+                <FormField
+                  control={form.control}
+                  name="imageUrl"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <FileUpload
+                          endpoint="serverImage"
+                          onChange={field.onChange}
+                          value={field.value} />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
               </div>
               <FormField
                 control={form.control}
