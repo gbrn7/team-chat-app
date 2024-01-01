@@ -24,6 +24,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components/ui/file-upload";
+import { useRouter } from "next/navigation";
 
 const formShcema = z.object({
   name: z.string().min(1, {
@@ -33,6 +34,7 @@ const formShcema = z.object({
     message: "Server image is required"
   })
 });
+const axios = require('axios');
 
 export const InitialModal = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -40,6 +42,8 @@ export const InitialModal = () => {
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  const router = useRouter();
 
   const form = useForm({
     resolver: zodResolver(formShcema),
@@ -52,7 +56,15 @@ export const InitialModal = () => {
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formShcema>) => {
-    console.log(values);
+    try {
+      await axios.post("/api/servers", values);
+
+      form.reset();
+      router.refresh();
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   if (!isMounted) {
