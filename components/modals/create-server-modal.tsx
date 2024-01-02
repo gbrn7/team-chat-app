@@ -2,6 +2,7 @@
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
+import axios from "axios";
 
 import {
   Dialog,
@@ -26,6 +27,7 @@ import { FileUpload } from "@/components/ui/file-upload";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
 
+
 const formShcema = z.object({
   name: z.string().min(1, {
     message: "Server name is required"
@@ -34,7 +36,6 @@ const formShcema = z.object({
     message: "Server image is required"
   })
 });
-const axios = require('axios');
 
 export const CreateServerModal = () => {
   const { isOpen, onClose, type } = useModal();
