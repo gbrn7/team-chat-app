@@ -1,7 +1,7 @@
 import { Server } from '@prisma/client';
 import {create } from 'zustand'
 //this code like react redux state management state
-export type ModalType = "createServer" | "invite" | "editServer";
+export type ModalType = "createServer" | "invite" | "editServer" | "members";
 
 interface ModalData {
   server?: Server
