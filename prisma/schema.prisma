@@ -91,7 +91,6 @@ model Channel {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  messageId String
 
   @@index([profileId])
   @@index([serverId])
