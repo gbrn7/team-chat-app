@@ -1,7 +1,7 @@
 import { Channel, ChannelType, Server } from '@prisma/client';
 import {create } from 'zustand'
 //this code like react redux state management state
-export type ModalType = "createServer" | "invite" | "editServer" | "members" |  "createChannel" | "leaveServer" | "deleteServer" | "deleteChannel" | "editChannel" | "messageFile";
+export type ModalType = "createServer" | "invite" | "editServer" | "members" |  "createChannel" | "leaveServer" | "deleteServer" | "deleteChannel" | "editChannel" | "messageFile" | "deleteMessage";
 
 interface ModalData {
   server?: Server,
